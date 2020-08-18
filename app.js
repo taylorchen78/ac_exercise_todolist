@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 // 載入 method-override
 const methodOverride = require('method-override')
+const usePassport = require('./config/passport')
 
 // 引用路由器
 const routes = require('./routes')
@@ -26,6 +27,8 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: true }))
 // 設定每一筆請求都會透過 methodOverride 進行前置處理
 app.use(methodOverride('_method'))
+
+usePassport(app)
 
 // 將 request 導入路由器
 app.use(routes)
